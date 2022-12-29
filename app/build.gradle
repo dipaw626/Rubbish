@@ -44,6 +44,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    def lifecycle_version = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     // Import the Firebase
     implementation platform('com.google.firebase:firebase-bom:31.0.2')
@@ -54,4 +57,7 @@ dependencies {
     //    PinView
     implementation 'io.github.chaosleung:pinview:1.4.3'
 
+    //midtrans
+    implementation 'com.midtrans:uikit:1.34.0-SANDBOX' // change the number to the latest version
+    implementation 'com.midtrans:uikit:1.34.0'
 }

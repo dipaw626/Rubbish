@@ -22,16 +22,14 @@ class RegistActivity : AppCompatActivity() {
 
     //reference
 
-    //database auth
+    //firebase auth
     lateinit var auth: FirebaseAuth
     lateinit var storedVerificationId:String
     lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
-    val database = FirebaseDatabase.getInstance().getReference("User")
 
     //firebase realtime database
-//    private lateinit var database: DatabaseReference
-
+    val database = FirebaseDatabase.getInstance().getReference("User")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +43,6 @@ class RegistActivity : AppCompatActivity() {
         val intentLogin = findViewById<TextView>(R.id.tvtologin)
         val regist = findViewById<Button>(R.id.buttonRegister)
         val phone = findViewById<EditText>(R.id.etphoneRegister)
-//        val next = findViewById<Button>(R.id.buttonSelanjutnyaRegister)
-//        val pass = findViewById<EditText>(R.id.etpassRegister)
 
         auth = FirebaseAuth.getInstance()
         var currentUser = auth!!.currentUser
@@ -59,7 +55,6 @@ class RegistActivity : AppCompatActivity() {
         //reference
         auth = FirebaseAuth.getInstance()
 
-
         //intent to login
         intentLogin.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
@@ -70,6 +65,7 @@ class RegistActivity : AppCompatActivity() {
             var phone = phone.text.toString()
             phone="+62"+phone
             checkPhoneExist(phone)
+//            register()
         }
 
 
@@ -120,24 +116,14 @@ class RegistActivity : AppCompatActivity() {
         database.child(hp).get().addOnSuccessListener {
 
             if (it.exists()) {
-                //reference
-//                val numphone = findViewById<>()
-//                val uID = it.child("uid").value
-//                val PhoneNumber = it.child("phone").value
-
-                //set text to ui
-//                numphone.text =  PhoneNumber.toString()
-
                 Toast.makeText(this@RegistActivity, "Nomor sudah terdaftar, silahkan login...", Toast.LENGTH_LONG).show()
                 startActivity(Intent(this@RegistActivity, LoginActivity::class.java))
                 finish()
             } else {
-//                Toast.makeText(this@RegistActivity, "Masukkan data dengan benar ! ", Toast.LENGTH_LONG).show()
                 register()
             }
 
-        }
-            .addOnFailureListener {
+        }.addOnFailureListener {
                 Toast.makeText(this@RegistActivity, "Failed", Toast.LENGTH_SHORT).show()
             }
     }

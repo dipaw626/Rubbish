@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#3EBAA1"
     android:layout_height="match_parent"
-    tools:context=".Profile.ProfileActivity">
+    android:background="#3EBAA1"
+    tools:context=".Profile.PengaturanActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -21,16 +21,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsregular"
-                android:text="Profile"
+                android:text="Pengaturan"
                 android:textColor="@color/white"
                 android:textSize="22dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ivback" />
+                app:layout_constraintTop_toTopOf="@+id/ivbackset" />
 
             <ImageView
-                android:id="@+id/ivback"
+                android:id="@+id/ivbackset"
                 android:layout_width="34dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="16dp"
@@ -65,60 +65,57 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvusername"
+                        android:id="@+id/tvusernameset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:text="username"
-                        android:fontFamily="@font/poppinsregular"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView24" />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tvphone"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="+62"-->
-<!--                        app:layout_constraintEnd_toEndOf="@+id/tvusername"-->
-<!--                        app:layout_constraintStart_toStartOf="@+id/tvusername"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/tvusername" />-->
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/tvphone"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="8dp"-->
+                    <!--                        android:text="+62"-->
+                    <!--                        app:layout_constraintEnd_toEndOf="@+id/tvusername"-->
+                    <!--                        app:layout_constraintStart_toStartOf="@+id/tvusername"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@+id/tvusername" />-->
 
                     <TextView
-                        android:id="@+id/tvemail"
+                        android:id="@+id/tvemailset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="email"
-                        android:fontFamily="@font/poppinsregular"
-                        app:layout_constraintEnd_toEndOf="@+id/tvusername"
-                        app:layout_constraintStart_toStartOf="@+id/tvusername"
-                        app:layout_constraintTop_toBottomOf="@+id/tvusername" />
+                        app:layout_constraintEnd_toEndOf="@+id/tvusernameset"
+                        app:layout_constraintStart_toStartOf="@+id/tvusernameset"
+                        app:layout_constraintTop_toBottomOf="@+id/tvusernameset" />
 
                     <TextView
-                        android:id="@+id/tvalamat"
+                        android:id="@+id/tvalamatset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="alamat"
-                        android:fontFamily="@font/poppinsregular"
-                        app:layout_constraintEnd_toEndOf="@+id/tvemail"
+                        app:layout_constraintEnd_toEndOf="@+id/tvemailset"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="@+id/tvemail"
-                        app:layout_constraintTop_toBottomOf="@+id/tvemail" />
+                        app:layout_constraintStart_toStartOf="@+id/tvemailset"
+                        app:layout_constraintTop_toBottomOf="@+id/tvemailset" />
 
-                    <ImageView
-                        android:id="@+id/setAll"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="12dp"
-                        android:src="@drawable/image11"
-                        app:layout_constraintEnd_toEndOf="@+id/tvalamat"
-                        app:layout_constraintStart_toStartOf="@+id/tvalamat"
-                        app:layout_constraintTop_toBottomOf="@+id/tvalamat" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/setAll"-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="25dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:src="@drawable/image11"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/tvalamat"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/tvalamat"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/tvalamat" />-->
 
                     <TextView
                         android:id="@+id/textView10"
@@ -126,10 +123,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="64dp"
-                        android:text="Akun"
+                        android:text="Pengaturan"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvalamat" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvalamatset" />
 
                     <!--                    <ImageView-->
                     <!--                        android:id="@+id/imageView26"-->
@@ -147,7 +144,7 @@
                         android:layout_marginTop="16dp"
                         app:layout_constraintStart_toStartOf="@+id/textView10"
                         app:layout_constraintTop_toBottomOf="@+id/textView10"
-                        app:srcCompat="@drawable/pengaturan" />
+                        app:srcCompat="@drawable/bahasa" />
 
                     <ImageView
                         android:id="@+id/lok"
@@ -157,7 +154,7 @@
                         app:layout_constraintEnd_toEndOf="@+id/imageView27"
                         app:layout_constraintStart_toStartOf="@+id/imageView27"
                         app:layout_constraintTop_toBottomOf="@+id/imageView13"
-                        app:srcCompat="@drawable/logout" />
+                        app:srcCompat="@drawable/hapusakun" />
 
                     <!--                    <ImageView-->
                     <!--                        android:id="@+id/imageView29"-->
@@ -189,22 +186,22 @@
                     <!--                        app:layout_constraintTop_toTopOf="@+id/imageView26" />-->
 
                     <TextView
-                        android:id="@+id/pengaturan"
+                        android:id="@+id/bahasa"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Pengaturan"
+                        android:text="Bahasa"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView27"
                         app:layout_constraintStart_toEndOf="@+id/imageView27"
                         app:layout_constraintTop_toTopOf="@+id/imageView27" />
 
                     <TextView
-                        android:id="@+id/idlogout"
+                        android:id="@+id/idDeleteAkun"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Keluar akun"
+                        android:text="Hapus Akun"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/lok"
                         app:layout_constraintStart_toEndOf="@+id/lok"

@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginRegist.PasswordActivity">
+    tools:context=".Profile.SetAllActivity">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Set up Data"
+        android:text="Edit Profile"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:fontFamily="@font/poppinsregular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -20,39 +21,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/setpassword"
-        android:layout_width="303dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/edittext_bg"
-        android:gravity="center"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <EditText
         android:id="@+id/username"
         android:layout_width="303dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@drawable/edittext_bg"
+        android:fontFamily="@font/poppinsregular"
         android:gravity="center"
         android:hint="Username"
         android:inputType="textPersonName"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/setpassword"
-        app:layout_constraintStart_toStartOf="@+id/setpassword"
-        app:layout_constraintTop_toBottomOf="@+id/setpassword" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
         android:id="@+id/emailprofile"
         android:layout_width="303dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@drawable/edittext_bg"
         android:gravity="center"
         android:hint="Email"
@@ -60,34 +46,65 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/username"
         app:layout_constraintStart_toStartOf="@+id/username"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <EditText
         android:id="@+id/alamat"
         android:layout_width="303dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@drawable/edittext_bg"
         android:gravity="center"
         android:hint="Alamat"
         android:inputType="text"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/emailprofile"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/emailprofile"
-        app:layout_constraintTop_toBottomOf="@+id/emailprofile" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <Button
-        android:id="@+id/OK"
+        android:id="@+id/update"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#3EBAA1"
         android:fontFamily="@font/poppinsregular"
-        android:text="OK"
+        android:text="Update"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="@+id/alamat"
         app:layout_constraintStart_toStartOf="@+id/alamat"
         app:layout_constraintTop_toBottomOf="@+id/alamat" />
 
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Username"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/poppinsregular"
+        android:text="Email"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/emailprofile"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/poppinsregular"
+        android:text="Alamat"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/alamat"
+        app:layout_constraintTop_toBottomOf="@+id/emailprofile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

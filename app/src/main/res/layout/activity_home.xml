@@ -33,6 +33,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="Hi Roisul"
+                android:fontFamily="@font/montserrat_bold"
                 android:textColor="#19826A"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,17 +45,19 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Selamat Datang!"
+                android:fontFamily="@font/poppinsregular"
                 android:textColor="#19826A"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvuser" />
 
             <TextView
-                android:id="@+id/textView100"
+                android:id="@+id/tvalamathome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Perumahan Denanyar Indah Blok L-6"
                 android:textColor="#19826A"
+                android:fontFamily="@font/poppinsregular"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -299,8 +302,8 @@
 
             <ImageView
                 android:id="@+id/ivhome"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="64dp"
                 android:src="@drawable/home"
                 app:layout_constraintBottom_toBottomOf="@+id/ivstatus"
@@ -309,8 +312,8 @@
 
             <ImageView
                 android:id="@+id/ivstatus"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/status"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -320,8 +323,8 @@
 
             <ImageView
                 android:id="@+id/ivakun"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="64dp"
                 app:layout_constraintBottom_toBottomOf="@+id/ivstatus"
                 app:layout_constraintEnd_toEndOf="parent"

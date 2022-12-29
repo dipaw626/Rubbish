@@ -27,7 +27,7 @@ class StatusActivity : AppCompatActivity() {
         var currentUser = auth.currentUser
 
         if(currentUser==null){
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this,LoginActivity::class.java))
             finish()
         }
 

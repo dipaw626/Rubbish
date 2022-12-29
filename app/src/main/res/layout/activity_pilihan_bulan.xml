@@ -19,7 +19,7 @@
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif"
+                android:fontFamily="@font/poppinsregular"
                 android:text="Pilihan Bulan Selanjutnya"
                 android:textColor="@color/white"
                 android:textSize="22dp"
@@ -39,13 +39,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/tglnow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:text="3 Desember 2022"
+                android:text="Tanggal"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -61,7 +60,7 @@
                 android:layout_marginTop="8dp"
                 android:text=""
                 android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/textView14"
+                app:layout_constraintTop_toBottomOf="@+id/tglnow"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="1dp" />
 
@@ -138,15 +137,15 @@
 
                     <!--                    </EditText>-->
 
-                    <ImageView
-                        android:id="@+id/ivNextpilihanbulan"
-                        android:layout_width="313dp"
-                        android:layout_height="44dp"
-                        android:layout_marginTop="50dp"
-                        app:layout_constraintEnd_toEndOf="@+id/iv12bulan"
-                        app:layout_constraintStart_toStartOf="@+id/iv12bulan"
-                        app:layout_constraintTop_toBottomOf="@+id/iv12bulan"
-                        app:srcCompat="@drawable/selanjutnya" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ivNextpilihanbulan"-->
+<!--                        android:layout_width="313dp"-->
+<!--                        android:layout_height="44dp"-->
+<!--                        android:layout_marginTop="50dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/iv12bulan"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/iv12bulan"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/iv12bulan"-->
+<!--                        app:srcCompat="@drawable/selanjutnya" />-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

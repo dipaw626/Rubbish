@@ -170,6 +170,7 @@
         android:background="@drawable/edittext_bg"
         android:hint=" Masukkan nomor hp"
         android:inputType="phone"
+        android:textSize="15sp"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintStart_toEndOf="@+id/editText"

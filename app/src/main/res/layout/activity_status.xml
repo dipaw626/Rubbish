@@ -340,8 +340,8 @@
 
             <ImageView
                 android:id="@+id/ivhome"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="64dp"
                 android:src="@drawable/home"
                 app:layout_constraintBottom_toBottomOf="@+id/ivstatus"
@@ -350,8 +350,8 @@
 
             <ImageView
                 android:id="@+id/ivstatus"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/status"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -361,8 +361,8 @@
 
             <ImageView
                 android:id="@+id/ivakun"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="64dp"
                 app:layout_constraintBottom_toBottomOf="@+id/ivstatus"
                 app:layout_constraintEnd_toEndOf="parent"

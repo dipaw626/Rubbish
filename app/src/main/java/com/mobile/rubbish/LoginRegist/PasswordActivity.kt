@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.mobile.rubbish.Profile.ProfileActivity
 import com.mobile.rubbish.R
+import com.mobile.rubbish.Splash.SplashActivity
 import com.mobile.rubbish.databinding.ActivityPasswordBinding
 
 class PasswordActivity : AppCompatActivity() {
@@ -79,7 +80,7 @@ class PasswordActivity : AppCompatActivity() {
                 editusername.text.clear()
 
                 Toast.makeText(this, "Akun berhasil dibuat.",Toast.LENGTH_SHORT).show()
-                startActivity(Intent(applicationContext, ProfileActivity::class.java))
+                startActivity(Intent(applicationContext, SplashActivity::class.java))
                 finish()
 
             }.addOnFailureListener {

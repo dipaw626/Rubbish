@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.mobile.rubbish.LoginRegist.RegistActivity
 import com.mobile.rubbish.Profile.ProfileActivity
 import com.mobile.rubbish.R
+import com.mobile.rubbish.Splash.SplashActivity
 import com.mobile.rubbish.databinding.ActivityPasswordBinding
 
 class PasswordActivityLogin : AppCompatActivity() {
@@ -47,7 +48,7 @@ class PasswordActivityLogin : AppCompatActivity() {
             if (it.exists()) {
                 if (it.child("password").value == pass) {
                     Toast.makeText(this@PasswordActivityLogin, "Login berhasil. ", Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this@PasswordActivityLogin, ProfileActivity::class.java))
+                    startActivity(Intent(this@PasswordActivityLogin, SplashActivity::class.java))
                     finish()
                 } else{
                     Toast.makeText(this@PasswordActivityLogin, "Password salah ! ", Toast.LENGTH_LONG).show()

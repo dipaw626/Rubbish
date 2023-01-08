@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback
 import com.midtrans.sdk.corekit.core.MidtransSDK
 import com.midtrans.sdk.corekit.core.TransactionRequest
@@ -21,19 +22,29 @@ import com.midtrans.sdk.corekit.models.ShippingAddress
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 import com.mobile.rubbish.GlobalData
 import com.mobile.rubbish.Login.LoginActivity
+import com.mobile.rubbish.LoginRegist.User
 import com.mobile.rubbish.PembayaranNextMonth.PilihanBulanActivity
+import com.mobile.rubbish.Profile.ProfileActivity
 import com.mobile.rubbish.R
 import com.mobile.rubbish.home.HomeActivity
+import com.mobile.rubbish.payments.pembayaran
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.util.*
+import kotlin.collections.ArrayList
 
 class JenisActivity : AppCompatActivity() {
     private lateinit var tvbyrtenggat: TextView
     private lateinit var tvbayarnext: TextView
     private lateinit var ivback: ImageView
 
+    //firebase auth
     lateinit var auth: FirebaseAuth
+
+    //firebase realtime database
+    val databaseUser = FirebaseDatabase.getInstance().getReference("User")
+    val databasePembayaran = FirebaseDatabase.getInstance().getReference("Pembayaran")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,13 +94,6 @@ class JenisActivity : AppCompatActivity() {
         tvbyrtenggat.setOnClickListener{
             val bulan = GlobalData.bulan
             val tagihan = GlobalData.jumlah
-//            val editbulan = bulan.toInt()
-//            val edittextHarga = jumlah.text.toString()
-//            val catatan = catatan.text.toString()
-//            GlobalData.jumlah = edittextHarga.toInt()
-//            GlobalData.catatan = catatan.toString()
-//            val convertharga = edittextHarga.toInt()
-//            val kalikan = convertharga * hargaproduct.toInt()
             val kalikan = tagihan * bulan.toDouble()
 
             //Set datetime
@@ -105,14 +109,29 @@ class JenisActivity : AppCompatActivity() {
             val itemDetails = ArrayList<ItemDetails>()
             itemDetails.add(detail)
             uiKitDetails(transactionRequest)
-
             // Set item details into the transaction request.
             transactionRequest.itemDetails = itemDetails
 
-            //set transaction request into sdk instance(semua transaksirequest dijadikan satu di midtranssdk)
-            MidtransSDK.getInstance().transactionRequest = transactionRequest
-            MidtransSDK.getInstance().startPaymentUiFlow(this@JenisActivity)
+            val idPembayaran = UUID.randomUUID().toString().substring(0,12)
+            val phone = auth?.currentUser?.phoneNumber.toString()
+            databaseUser.child(phone).get().addOnSuccessListener {
+                if (it.exists()) {
+                    val username = it.child("username").value.toString()
 
+                    val Pembayaran = pembayaran(idPembayaran, phone, username, bulan, bulan*tagihan.toInt())
+                    databasePembayaran.child(phone).child(idPembayaran).setValue(Pembayaran).addOnSuccessListener {
+                        //set transaction request into sdk instance(semua transaksirequest dijadikan satu di midtranssdk)
+                        MidtransSDK.getInstance().transactionRequest = transactionRequest
+                        MidtransSDK.getInstance().startPaymentUiFlow(this@JenisActivity)
+
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "failed",Toast.LENGTH_SHORT).show()
+                    }
+
+                }else{
+                    Toast.makeText(this,"Pembayaran gagal", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         tvbayarnext.setOnClickListener{
@@ -124,26 +143,14 @@ class JenisActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-////            pembayaran ?
-////            logic nya
-////            -set tagihan harusnya kan dari admin tuh? jadi gimana nih ngeset nya jumlah tagihannya?
-////            val tagihan:Int = 150000
-////            val bulan:Int = 1
-//
-////            -terus bulan, misal dia bayar terakhir bulan agustus.. (sept 1, okto 2, nov 3, des)
-////            -terus dia bisa bayar tagihan terakhir pas desember (3 bulan setelah itu nonaktif)
-//
-////            looping bulan nya sampe 3 aja, setelah itu blacklist
-////            if(target in 1..3) {
-////                if (targ)
-////            }
-////            time.toInt()
-//
-//
-////            Log.d("tampilkan", "${kalikan.toInt()}")
-////            Log.d("tampilkan", kalikan.toString())
-
     }
+
+//    fun getRandomString(length: Int) : String {
+//        val allowedChars = ('A'..'Z')+('0'..'9')
+//        return (1..length)
+//            .map { allowedChars.random() }
+//            .joinToString("")
+//    }
 
 
     fun uiKitDetails(transactionRequest: TransactionRequest){

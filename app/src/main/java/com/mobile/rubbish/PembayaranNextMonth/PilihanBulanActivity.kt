@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback
 import com.midtrans.sdk.corekit.core.MidtransSDK
 import com.midtrans.sdk.corekit.core.TransactionRequest
@@ -21,9 +23,12 @@ import com.mobile.rubbish.GlobalData
 import com.mobile.rubbish.JenisPembayaran.JenisActivity
 import com.mobile.rubbish.Login.LoginActivity
 import com.mobile.rubbish.R
+import com.mobile.rubbish.payments.pembayaran
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PilihanBulanActivity : AppCompatActivity() {
 
@@ -33,7 +38,12 @@ class PilihanBulanActivity : AppCompatActivity() {
     private lateinit var transaksi12bulan: ImageView
     private lateinit var waktunow: TextView
 
+    //firebase auth
     lateinit var auth: FirebaseAuth
+
+    //firebase realtime database
+    val databaseUser = FirebaseDatabase.getInstance().getReference("User")
+    val databasePembayaran = FirebaseDatabase.getInstance().getReference("Pembayaran")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +60,8 @@ class PilihanBulanActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         var currentUser = auth.currentUser
+        val phone = auth?.currentUser?.phoneNumber.toString()
+        val idPembayaran = UUID.randomUUID().toString().substring(0,12)
 
         //checkuser
         if(currentUser==null){
@@ -63,9 +75,6 @@ class PilihanBulanActivity : AppCompatActivity() {
         val time = currentTime.format(formatTime)
         waktunow.setText(time)
 
-
-
-
         ivback.setOnClickListener{
             val intent = Intent(applicationContext, JenisActivity::class.java)
             startActivity(intent)
@@ -76,7 +85,6 @@ class PilihanBulanActivity : AppCompatActivity() {
             .setContext(applicationContext)
             .setTransactionFinishedCallback(TransactionFinishedCallback {
                     result ->
-
 //                    if (result.status == "success") {
 //                        Toast.makeText(this@JenisActivity, "berhasil", Toast.LENGTH_SHORT).show()
 //                    }
@@ -99,16 +107,7 @@ class PilihanBulanActivity : AppCompatActivity() {
         transaksi3bulan.setOnClickListener{
             val bulan = 3
             val tagihan = GlobalData.jumlah
-//            val editbulan = bulan.toInt()
-//            val edittextHarga = jumlah.text.toString()
-//            val catatan = catatan.text.toString()
-//            GlobalData.jumlah = edittextHarga.toInt()
-//            GlobalData.catatan = catatan.toString()
-//            val convertharga = edittextHarga.toInt()
-//            val kalikan = convertharga * hargaproduct.toInt()
             val kalikan = tagihan * bulan.toDouble()
-
-
 
             //currentimemillis(memberikan id tagihan yg berbeda meskipun detik nya sama)
             val transactionRequest = TransactionRequest("rubbish-"+System.currentTimeMillis().toString()+ "",kalikan)
@@ -122,27 +121,31 @@ class PilihanBulanActivity : AppCompatActivity() {
             // Set item details into the transaction request.
             transactionRequest.itemDetails = itemDetails
 
-            //set transaction request into sdk instance(semua transaksirequest dijadikan satu di midtranssdk)
-            MidtransSDK.getInstance().transactionRequest = transactionRequest
-            MidtransSDK.getInstance().startPaymentUiFlow(this@PilihanBulanActivity)
+            databaseUser.child(phone).get().addOnSuccessListener {
+                if (it.exists()) {
+                    val username = it.child("username").value.toString()
+
+                    val Pembayaran = pembayaran(idPembayaran, phone, username, bulan, bulan*tagihan.toInt())
+                    databasePembayaran.child(phone).child(idPembayaran).setValue(Pembayaran).addOnSuccessListener {
+                        //set transaction request into sdk instance(semua transaksirequest dijadikan satu di midtranssdk)
+                        MidtransSDK.getInstance().transactionRequest = transactionRequest
+                        MidtransSDK.getInstance().startPaymentUiFlow(this@PilihanBulanActivity)
+
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "failed",Toast.LENGTH_SHORT).show()
+                    }
+
+                }else{
+                    Toast.makeText(this,"Pembayaran gagal", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
 
         transaksi6bulan.setOnClickListener{
             val bulan = 6
             val tagihan = GlobalData.jumlah
-//            val editbulan = bulan.toInt()
-//            val edittextHarga = jumlah.text.toString()
-//            val catatan = catatan.text.toString()
-//            GlobalData.jumlah = edittextHarga.toInt()
-//            GlobalData.catatan = catatan.toString()
-//            val convertharga = edittextHarga.toInt()
-//            val kalikan = convertharga * hargaproduct.toInt()
             val kalikan = tagihan * bulan.toDouble()
-
-            //Set datetime
-            val currentTime =  LocalDateTime.now()
-            val formatTime = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-            val time = currentTime.format(formatTime)
 
             //currentimemillis(memberikan id tagihan yg berbeda meskipun detik nya sama)
             val transactionRequest = TransactionRequest("rubbish-"+System.currentTimeMillis().toString()+ "",kalikan)
@@ -156,27 +159,31 @@ class PilihanBulanActivity : AppCompatActivity() {
             // Set item details into the transaction request.
             transactionRequest.itemDetails = itemDetails
 
-            //set transaction request into sdk instance(semua transaksirequest dijadikan satu di midtranssdk)
-            MidtransSDK.getInstance().transactionRequest = transactionRequest
-            MidtransSDK.getInstance().startPaymentUiFlow(this@PilihanBulanActivity)
+            databaseUser.child(phone).get().addOnSuccessListener {
+                if (it.exists()) {
+                    val username = it.child("username").value.toString()
+
+                    val Pembayaran = pembayaran(idPembayaran, phone, username, bulan, bulan*tagihan.toInt())
+                    databasePembayaran.child(phone).child(idPembayaran).setValue(Pembayaran).addOnSuccessListener {
+                        //set transaction request into sdk instance(semua transaksirequest dijadikan satu di midtranssdk)
+                        MidtransSDK.getInstance().transactionRequest = transactionRequest
+                        MidtransSDK.getInstance().startPaymentUiFlow(this@PilihanBulanActivity)
+
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "failed",Toast.LENGTH_SHORT).show()
+                    }
+
+                }else{
+                    Toast.makeText(this,"Pembayaran gagal", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
 
         transaksi12bulan.setOnClickListener{
             val bulan = 12
             val tagihan = GlobalData.jumlah
-//            val editbulan = bulan.toInt()
-//            val edittextHarga = jumlah.text.toString()
-//            val catatan = catatan.text.toString()
-//            GlobalData.jumlah = edittextHarga.toInt()
-//            GlobalData.catatan = catatan.toString()
-//            val convertharga = edittextHarga.toInt()
-//            val kalikan = convertharga * hargaproduct.toInt()
             val kalikan = tagihan * bulan.toDouble()
-
-            //Set datetime
-            val currentTime =  LocalDateTime.now()
-            val formatTime = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-            val time = currentTime.format(formatTime)
 
             //currentimemillis(memberikan id tagihan yg berbeda meskipun detik nya sama)
             val transactionRequest = TransactionRequest("rubbish-"+System.currentTimeMillis().toString()+ "",kalikan)
@@ -190,14 +197,27 @@ class PilihanBulanActivity : AppCompatActivity() {
             // Set item details into the transaction request.
             transactionRequest.itemDetails = itemDetails
 
-            //set transaction request into sdk instance(semua transaksirequest dijadikan satu di midtranssdk)
-            MidtransSDK.getInstance().transactionRequest = transactionRequest
-            MidtransSDK.getInstance().startPaymentUiFlow(this@PilihanBulanActivity)
+            databaseUser.child(phone).get().addOnSuccessListener {
+                if (it.exists()) {
+                    val username = it.child("username").value.toString()
+
+                    val Pembayaran = pembayaran(idPembayaran, phone, username, bulan, bulan*tagihan.toInt())
+                    databasePembayaran.child(phone).child(idPembayaran).setValue(Pembayaran).addOnSuccessListener {
+                        //set transaction request into sdk instance(semua transaksirequest dijadikan satu di midtranssdk)
+                        MidtransSDK.getInstance().transactionRequest = transactionRequest
+                        MidtransSDK.getInstance().startPaymentUiFlow(this@PilihanBulanActivity)
+
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "failed",Toast.LENGTH_SHORT).show()
+                    }
+
+                }else{
+                    Toast.makeText(this,"Pembayaran gagal", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
-
     }
-
 
     fun uiKitDetails(transactionRequest: TransactionRequest){
 
